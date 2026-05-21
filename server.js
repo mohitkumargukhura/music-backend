@@ -21,7 +21,19 @@ status:"running"
 });
 
 });
+app.get(
+"/health",
 
+(req,res)=>{
+
+res.json({
+status:"alive",
+time:
+Date.now()
+});
+
+}
+);
 app.use(
 "/search",
 require("./routes/search")
