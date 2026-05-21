@@ -52,10 +52,10 @@ async(req,res)=>{
 
 try{
 
-const tracks=
+const tracks =
 await spotifyGet(
 
-`playlists/${req.params.id}/tracks?market=IN&limit=10`
+`playlists/${req.params.id}/tracks`
 
 );
 
