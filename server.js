@@ -69,6 +69,12 @@ app.use(
 "/track",
 require("./routes/track")
 );
+app.use(
+"/categories",
+require(
+"./routes/categories"
+)
+);
 
 app.listen(
 process.env.PORT,

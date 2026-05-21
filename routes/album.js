@@ -2,7 +2,9 @@ const router =
 require("express").Router();
 
 const spotifyGet =
-require("../services/spotifyApi");
+require(
+"../services/spotifyApi"
+);
 
 router.get(
 "/:id",
@@ -11,12 +13,58 @@ async(req,res)=>{
 
 try{
 
-const album=
+const album =
 await spotifyGet(
 `albums/${req.params.id}`
 );
 
-res.json(album);
+res.json(
+album
+);
+
+}
+
+catch(error){
+
+console.log(
+error.response?.data
+||
+error.message
+);
+
+res.status(500)
+.json(
+error.response?.data
+||
+{
+error:
+error.message
+}
+);
+
+}
+
+}
+
+);
+
+router.get(
+"/:id/tracks",
+
+async(req,res)=>{
+
+try{
+
+const tracks =
+await spotifyGet(
+
+`albums/${req.params.id}/tracks?market=IN&limit=20`
+
+);
+
+res.json(
+tracks
+);
 
 }
 
@@ -27,7 +75,8 @@ res.status(500)
 error.response?.data
 ||
 {
-error:error.message
+error:
+error.message
 }
 );
 
@@ -37,4 +86,5 @@ error:error.message
 
 );
 
-module.exports=router;
+module.exports=
+router;
