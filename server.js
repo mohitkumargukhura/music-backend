@@ -36,7 +36,9 @@ Date.now()
 );
 app.use(
 "/search",
-require("./routes/search")
+require(
+"./routes/search"
+)
 );
 
 app.use(

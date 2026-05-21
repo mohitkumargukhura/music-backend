@@ -1,8 +1,13 @@
+const express =
+require("express");
+
 const router =
-require("express").Router();
+express.Router();
 
 const spotifyGet =
-require("../services/spotifyApi");
+require(
+"../services/spotifyApi"
+);
 
 router.get(
 "/",
@@ -12,52 +17,30 @@ async(req,res)=>{
 try{
 
 const q =
-encodeURIComponent(
-req.query.q || ""
-);
-
-if(!q){
-
-return res
-.status(400)
-.json({
-error:
-"missing query"
-});
-
-}
+req.query.q;
 
 const data =
 await spotifyGet(
 
-`search?q=${q}&type=track,artist,album&limit=10`
+`search?q=${q}&type=track,artist&limit=10`
 
 );
 
-res.json(data);
+res.json(
+data
+);
 
 }
 
 catch(error){
 
-console.log(
+res.status(500)
+.json({
 
-error.response?.data
-||
+error:
 error.message
 
-);
-
-res.status(500)
-.json(
-
-error.response?.data
-||
-{
-error:error.message
-}
-
-);
+});
 
 }
 
@@ -65,4 +48,5 @@ error:error.message
 
 );
 
-module.exports = router;
+module.exports =
+router;
