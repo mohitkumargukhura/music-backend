@@ -52,10 +52,20 @@ async(req,res)=>{
 
 try{
 
+const playlist =
+await spotifyGet(
+`playlists/${req.params.id}`
+);
+
+const name =
+encodeURIComponent(
+playlist.name
+);
+
 const tracks =
 await spotifyGet(
 
-`playlists/${req.params.id}/tracks`
+`search?q=${name}&type=track&limit=10`
 
 );
 
